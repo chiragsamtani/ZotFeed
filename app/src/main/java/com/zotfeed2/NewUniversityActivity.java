@@ -1,8 +1,5 @@
 package com.zotfeed2;
 
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,10 +7,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -32,20 +35,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
-public class MainActivity extends AppCompatActivity {
-    private boolean playing = false;
-    private boolean started = true;
-    private Button button;
-    private String url = "http://streamer.kuci.org:8000/high";
-    private MediaPlayer mediaPlayer;
+public class NewUniversityActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_new_university);
         // Adding Toolbar to Main screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -84,40 +79,16 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-
-        button = (Button) findViewById(R.id.fab);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //cannot play it multiple times
-                if(!playing){
-                    button.setText("Pause");
-                    if(started)
-                        new startRadio().execute(url);
-                    else
-                    {
-                        if(mediaPlayer.isPlaying()){
-                            mediaPlayer.start();
-                        }
-                    }
-                    playing = true;
-                }else{
-                    //if mediaplayer is currently playing
-                    button.setText("Play");
-                    if(mediaPlayer.isPlaying()) {
-                        mediaPlayer.pause();
-                    }
-                    playing = false;
-                }
-            }
-        });
     }
+
 
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new Fragment(), "Listen");
-        adapter.addFragment(new Fragment(), "Schedule");
+        adapter.addFragment(new CardContentFragment(), "Arts");
+        adapter.addFragment(new CardContentFragment(), "Events");
+        adapter.addFragment(new CardContentFragment(), "Music");
+        adapter.addFragment(new CardContentFragment(), "Sports");
         viewPager.setAdapter(adapter);
     }
 
@@ -148,46 +119,6 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
-    }
-
-
-
-
-    class startRadio extends AsyncTask<String, Void, Boolean>
-    {
-        @Override
-        protected Boolean doInBackground(String... params) {
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            try{
-                mediaPlayer.setDataSource(params[0]);
-                mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mp) {
-                        mediaPlayer.start();
-                        Toast.makeText(getApplicationContext(), "Stream has started", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        started = false;
-                        mediaPlayer.stop();
-                        mediaPlayer.release();
-                        Toast.makeText(getApplicationContext(), "Stream is no longer active", Toast.LENGTH_LONG).show();
-                        button.setBackgroundResource(R.drawable.playbutton);
-                        mediaPlayer = null;
-                    }
-                });
-                mediaPlayer.prepareAsync();
-            }catch (IOException e){
-                Toast.makeText(getApplicationContext(), "Error Occured In Handling Radio", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-            return true;
-        }
-
-
     }
 
 
