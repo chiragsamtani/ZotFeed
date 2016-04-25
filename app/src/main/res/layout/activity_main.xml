@@ -35,6 +35,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
+                app:titleTextColor="@color/White"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:layout_scrollFlags="scroll|enterAlways"
@@ -42,6 +43,8 @@
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
+                app:tabSelectedTextColor="@color/White"
+                app:tabTextColor="@color/White"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -49,20 +52,56 @@
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
+            android:background="@color/White"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <Button
-            android:id="@+id/fab"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:backgroundTint="@color/WhiteSmoke"
-            android:layout_gravity="center_horizontal"
-            android:text="Play" />
+            android:layout_gravity="center"
+            android:orientation="vertical">
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/button_layout_second"
+            android:src="@drawable/playbutton"
+            android:tint="@color/White"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:id="@+id/fab"
+            android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="NOW PLAYING"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:fontFamily="sans-serif"
+                android:textSize="35dp"
+                android:textColor="@color/Gray"
+                android:id="@+id/textView"
+                android:layout_gravity="center_horizontal" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Show One"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:fontFamily="sans-serif"
+                android:textSize="20dp"
+                android:textColor="@color/Gray"
+                android:id="@+id/showName"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>
-
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

@@ -24,6 +24,10 @@
         <activity
             android:name=".NewUniversityActivity"
             android:label="@string/title_activity_new_university"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ScheduleActivity"
+            android:label="@string/title_activity_schedule"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

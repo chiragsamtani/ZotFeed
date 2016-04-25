@@ -70,6 +70,7 @@ public class NewUniversityActivity extends AppCompatActivity {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         // Set item in checked state
+                        System.out.println(menuItem.getOrder());
                         menuItem.setChecked(true);
 
                         // TODO: handle navigation
