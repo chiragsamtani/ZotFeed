@@ -16,13 +16,13 @@
     </style>
 
     <style name="NewUniversityTheme">
-        <item name="colorPrimary">@color/MediumBlue</item>
+        <item name="colorPrimary">@color/DarkBlue</item>
         <item name="colorPrimaryDark">@color/White</item>
-        <item name="colorAccent">@color/Gray</item>
+        <item name="colorAccent">@color/LightGrey</item>
     </style>
 
     <style name="AnteaterTVTheme">
-        <item name="colorPrimary">@color/Blue</item>
+        <item name="colorPrimary">@color/DarkBlue</item>
         <item name="colorPrimaryDark">@color/White</item>
         <item name="colorAccent">@color/Gold</item>
     </style>

@@ -1,5 +1,13 @@
 package com.zotfeed2;
 
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -19,29 +27,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-public class NewUniversityActivity extends AppCompatActivity {
+
+public class AnteaterTvActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_university);
+        setContentView(R.layout.activity_anteater_tv);
+
         // Adding Toolbar to Main screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,7 +62,6 @@ public class NewUniversityActivity extends AppCompatActivity {
         // Create Navigation drawer and inflate layout
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-
 
         // Adding menu icon to Toolbar
         ActionBar supportActionBar = getSupportActionBar();
@@ -79,7 +83,7 @@ public class NewUniversityActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else if(menuItem.getTitle().equals("AnteaterTV")){
-                            Intent intent = new Intent(getApplicationContext(), AnteaterTvActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), ScheduleActivity.class);
                             startActivity(intent);
                         }
                         menuItem.setChecked(true);
@@ -91,8 +95,8 @@ public class NewUniversityActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-    }
 
+    }
 
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
