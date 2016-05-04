@@ -162,11 +162,11 @@ public class NewUniversityActivity extends AppCompatActivity {
 
     public void setTabIcons(TabLayout tab){
         if(tab.getTabAt(0) != null){
-            tab.getTabAt(0).setIcon(R.drawable.ic_mail_outline_white_24dp);
-            tab.getTabAt(1).setIcon(R.drawable.ic_mail_outline_white_24dp);
+            tab.getTabAt(0).setIcon(R.drawable.news_icon);
+            tab.getTabAt(1).setIcon(R.drawable.arts_icon);
             tab.getTabAt(2).setIcon(R.drawable.ic_mail_outline_white_24dp);
             tab.getTabAt(3).setIcon(R.drawable.ic_directions_run_white_24dp);
-            tab.getTabAt(4).setIcon(R.drawable.ic_mail_outline_white_24dp);
+            tab.getTabAt(4).setIcon(R.drawable.opinions_icon);
 
         }
     }
