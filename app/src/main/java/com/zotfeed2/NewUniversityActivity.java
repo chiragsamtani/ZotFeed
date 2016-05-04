@@ -100,16 +100,17 @@ public class NewUniversityActivity extends AppCompatActivity {
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new CardContentFragment());
-        adapter.addFragment(new CardContentFragment());
-        adapter.addFragment(new CardContentFragment());
-        adapter.addFragment(new CardContentFragment());
-        adapter.addFragment(new CardContentFragment());
+        adapter.addFragment(new CardContentFragment(), "News");
+        adapter.addFragment(new CardContentFragment(), "A&E");
+        adapter.addFragment(new CardContentFragment(), "Features");
+        adapter.addFragment(new CardContentFragment(), "Sports");
+        adapter.addFragment(new CardContentFragment(), "Opinions");
         viewPager.setAdapter(adapter);
     }
 
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
 
         public Adapter(FragmentManager manager) {
             super(manager);
@@ -125,10 +126,15 @@ public class NewUniversityActivity extends AppCompatActivity {
             return mFragmentList.size();
         }
 
-        public void addFragment(Fragment fragment) {
+        public void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
         }
 
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 
 
