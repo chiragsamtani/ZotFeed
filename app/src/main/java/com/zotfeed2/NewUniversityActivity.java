@@ -54,6 +54,9 @@ public class NewUniversityActivity extends AppCompatActivity {
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
+        setTabIcons(tabs);
+
+
         // Create Navigation drawer and inflate layout
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -97,16 +100,16 @@ public class NewUniversityActivity extends AppCompatActivity {
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new CardContentFragment(), "Arts");
-        adapter.addFragment(new CardContentFragment(), "Events");
-        adapter.addFragment(new CardContentFragment(), "Music");
-        adapter.addFragment(new CardContentFragment(), "Sports");
+        adapter.addFragment(new CardContentFragment());
+        adapter.addFragment(new CardContentFragment());
+        adapter.addFragment(new CardContentFragment());
+        adapter.addFragment(new CardContentFragment());
+        adapter.addFragment(new CardContentFragment());
         viewPager.setAdapter(adapter);
     }
 
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
 
         public Adapter(FragmentManager manager) {
             super(manager);
@@ -122,15 +125,10 @@ public class NewUniversityActivity extends AppCompatActivity {
             return mFragmentList.size();
         }
 
-        public void addFragment(Fragment fragment, String title) {
+        public void addFragment(Fragment fragment) {
             mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
         }
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
     }
 
 
@@ -154,6 +152,17 @@ public class NewUniversityActivity extends AppCompatActivity {
             mDrawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setTabIcons(TabLayout tab){
+        if(tab.getTabAt(0) != null){
+            tab.getTabAt(0).setIcon(R.drawable.ic_mail_outline_white_24dp);
+            tab.getTabAt(1).setIcon(R.drawable.ic_mail_outline_white_24dp);
+            tab.getTabAt(2).setIcon(R.drawable.ic_mail_outline_white_24dp);
+            tab.getTabAt(3).setIcon(R.drawable.ic_directions_run_white_24dp);
+            tab.getTabAt(4).setIcon(R.drawable.ic_mail_outline_white_24dp);
+
+        }
     }
 
 
