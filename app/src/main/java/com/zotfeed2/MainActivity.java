@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
-        // Create Navigation drawer and inlfate layout
+        // Create Navigation drawer and inflate layout
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else if(menuItem.getTitle().equals("AnteaterTV")){
-                            Intent intent = new Intent(getApplicationContext(), ScheduleActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), AnteaterTvActivity.class);
                             startActivity(intent);
                         }
                         menuItem.setChecked(true);
@@ -155,8 +155,8 @@ public class MainActivity extends AppCompatActivity {
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new Fragment(), "Listen");
-        adapter.addFragment(new Fragment(), "Schedule");
+        adapter.addFragment(new SlidingFragment(), "Listen");
+        adapter.addFragment(new SlidingFragment(), "Schedule");
         viewPager.setAdapter(adapter);
     }
 

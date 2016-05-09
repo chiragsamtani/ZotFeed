@@ -3,7 +3,9 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_new_university">NewUniversity</string>
     <string name="item_title">Title</string>
+    <string name="new_u_title">Article Title</string>
     <string name="item_desc">Description</string>
+    <string name="new_u_desc">Article Description</string>
     <string name="detail_desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
         nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
@@ -12,5 +14,11 @@
         deserunt mollit anim id est laborum.
     </string>
     <string name="detail_location">"8 Rue Scribe, 75009 Paris, France"</string>
-    <string name="title_activity_schedule">ScheduleActivit</string>
+    <string name="title_activity_schedule">ScheduleActivity</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_anteater_tv">AnteaterTvActivity</string>
+    <string name="nav_anteatertv">AnteaterTV</string>
+    <string name="nav_newuniversity">New University</string>
+    <string name="nav_kuci">KUCI</string>
 </resources>
