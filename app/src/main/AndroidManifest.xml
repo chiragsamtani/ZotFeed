@@ -33,6 +33,10 @@
             android:name=".AnteaterTvActivity"
             android:label="@string/title_activity_anteater_tv"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".DetailActivity"
+            android:label="@string/item_title"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -15,7 +15,6 @@
     </string>
     <string name="detail_location">"8 Rue Scribe, 75009 Paris, France"</string>
     <string name="title_activity_schedule">ScheduleActivity</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_anteater_tv">AnteaterTvActivity</string>
     <string name="nav_anteatertv">AnteaterTV</string>
