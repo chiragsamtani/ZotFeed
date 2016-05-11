@@ -53,14 +53,34 @@ import java.util.Set;
  */
 public class ListContentFragment extends Fragment {
     RecyclerView recyclerView;
-    Bundle bundle;
+    private String link;
+    private final static String LINK_PARAM = "link";
+    public static ListContentFragment newInstance(String link){
+        ListContentFragment fragment = new ListContentFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(LINK_PARAM, link);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        link = getArguments().getString(LINK_PARAM);
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_view, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-        RSSFeedController controller = new RSSFeedController("http://www.newuniversity.org/category/entertainment/feed/");
-        controller.execute();
+        if(link != null) {
+
+            System.out.println(link +"link here!!!");
+            RSSFeedController controller = new RSSFeedController(link);
+            controller.execute();
+
+        }
         return view;
     }
 

@@ -75,7 +75,6 @@ public class NewUniversityActivity extends AppCompatActivity {
         tabs = (TabLayout) findViewById(R.id.tabs);
         setupViewPager(viewPager);
         tabs.setupWithViewPager(viewPager);
-        setTabIcons(tabs);
         // Create Navigation drawer and inflate layout
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -116,19 +115,67 @@ public class NewUniversityActivity extends AppCompatActivity {
     }
 
     // Add Fragments to Tabs
-    private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new ListContentFragment(), "Arts");
-        adapter.addFragment(new ListContentFragment(), "Events");
-        adapter.addFragment(new ListContentFragment(), "Music");
-        adapter.addFragment(new ListContentFragment(), "Sports");
+    private void setupViewPager(final ViewPager viewPager) {
+        final Adapter adapter = new Adapter(getSupportFragmentManager());
+        adapter.addFragment(ListContentFragment.newInstance("http://www.newuniversity.org/category/news/feed/"), "News");
+        adapter.addFragment(ListContentFragment.newInstance("http://www.newuniversity.org/category/entertainment/feed/"), "Entertainment");
+        adapter.addFragment(ListContentFragment.newInstance("http://www.newuniversity.org/category/features/feed/"), "Features");
+        adapter.addFragment(ListContentFragment.newInstance("http://www.newuniversity.org/category/sports/feed/"), "Sports");
+        adapter.addFragment(ListContentFragment.newInstance("http://www.newuniversity.org/category/opinion/feed/"), "Opinion");
+        ///adapter.addFragment(new ListContentFragment(), "Arts");
         viewPager.setAdapter(adapter);
+
+//        final Bundle bundle = new Bundle();
+//        viewPager.setAdapter(adapter);
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                if(position == 0){
+//                    bundle.putString("link", "http://www.newuniversity.org/category/news/feed/");
+//                    ListContentFragment fragment = new ListContentFragment();
+//                    fragment.setArguments(bundle);
+//                    adapter.addFragment(fragment, "News");
+//                }
+//                else if (position == 1){
+//                    bundle.putString("link", "http://www.newuniversity.org/category/entertainment/feed/");
+//                    ListContentFragment fragment = new ListContentFragment();
+//                    fragment.setArguments(bundle);
+//                    adapter.addFragment(fragment, "A & E");
+//                }else if(position == 2){
+//                    bundle.putString("link", "http://www.newuniversity.org/category/features/feed/");
+//                    ListContentFragment fragment = new ListContentFragment();
+//                    fragment.setArguments(bundle);
+//                    adapter.addFragment(fragment, "Features");
+//                }   else if (position == 3){
+//                    bundle.putString("link", "http://www.newuniversity.org/category/sports/feed/");
+//                    ListContentFragment fragment = new ListContentFragment();
+//                    fragment.setArguments(bundle);
+//                    adapter.addFragment(fragment, "Sports");
+//                }   else if (position == 4){
+//                    bundle.putString("link", "http://www.newuniversity.org/category/opinion/feed/");
+//                    ListContentFragment fragment = new ListContentFragment();
+//                    fragment.setArguments(bundle);
+//                    adapter.addFragment(fragment, "Opinion");
+//                }
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
+//        viewPager.setAdapter(adapter);
     }
 
     static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
-
+        private Bundle bundle = new Bundle();
         public Adapter(FragmentManager manager) {
             super(manager);
         }
@@ -136,6 +183,35 @@ public class NewUniversityActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             return mFragmentList.get(position);
+//            switch(position){
+//                case 0:
+//                    bundle.putString("link", "http://www.newuniversity.org/category/news/feed/");
+//                    ListContentFragment fragment = new ListContentFragment();
+//                    fragment.setArguments(bundle);
+//                    return fragment;
+//                case 1:
+//                    bundle.putString("link", "http://www.newuniversity.org/category/entertainment/feed/");
+//                    ListContentFragment fragment1 = new ListContentFragment();
+//                    fragment1.setArguments(bundle);
+//                    return fragment1;
+//                case 2:
+//                    bundle.putString("link", "http://www.newuniversity.org/category/features/feed/");
+//                    ListContentFragment fragment2 = new ListContentFragment();
+//                    fragment2.setArguments(bundle);
+//                    return fragment2;
+//                case 3:
+//                    bundle.putString("link", "http://www.newuniversity.org/category/opinion/feed/");
+//                    ListContentFragment fragment3 = new ListContentFragment();
+//                    fragment3.setArguments(bundle);
+//                    return fragment3;
+//                case 4:
+//                    bundle.putString("link", "http://www.newuniversity.org/category/entertainment/feed/");
+//                    ListContentFragment fragment4 = new ListContentFragment();
+//                    fragment4.setArguments(bundle);
+//                    return fragment4;
+//                default:
+//                    return null;
+//            }
         }
 
         @Override
@@ -147,6 +223,7 @@ public class NewUniversityActivity extends AppCompatActivity {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
+
 
         @Override
         public CharSequence getPageTitle(int position) {
@@ -173,13 +250,5 @@ public class NewUniversityActivity extends AppCompatActivity {
             mDrawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
-    }
-    public void setTabIcons(TabLayout tab){
-        if(tab.getTabAt(0) != null) {
-            tab.getTabAt(0).setIcon(R.drawable.menubar);
-            tab.getTabAt(1).setIcon(R.drawable.menubar);
-            tab.getTabAt(2).setIcon(R.drawable.menubar);
-            tab.getTabAt(3).setIcon(R.drawable.menubar);
-        }
     }
 }
