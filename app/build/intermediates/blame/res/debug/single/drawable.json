@@ -28,6 +28,10 @@
         "source": "D:\\ZotFeed2\\app\\src\\main\\res\\drawable\\arts_icon.png"
     },
     {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\newu_icon.png",
+        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\drawable\\newu_icon.png"
+    },
+    {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\pausebutton.png",
         "source": "D:\\ZotFeed2\\app\\src\\main\\res\\drawable\\pausebutton.png"
     },
@@ -136,6 +140,10 @@
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_switch_thumb_material.xml"
     },
     {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\stopbutton.png",
+        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\drawable\\stopbutton.png"
+    },
+    {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_text_cursor_material.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_text_cursor_material.xml"
     },
@@ -146,6 +154,10 @@
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_ratingbar_full_material.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\drawable\\abc_ratingbar_full_material.xml"
+    },
+    {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\kuci_logo.png",
+        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\drawable\\kuci_logo.png"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\ic_directions_run_white_24dp.png",

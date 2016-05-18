@@ -94,7 +94,7 @@ public class NewUniversityActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         // Set item in checked state
                         if (menuItem.getTitle().equals("KUCI")) {
-                            Intent intent = new Intent(getApplicationContext(), NewUniversityActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         } else if (menuItem.getTitle().equals("New University")) {
                             Intent intent = new Intent(getApplicationContext(), NewUniversityActivity.class);
@@ -118,7 +118,7 @@ public class NewUniversityActivity extends AppCompatActivity {
     private void setupViewPager(final ViewPager viewPager) {
         final Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(ListContentFragment.newInstance("http://www.newuniversity.org/category/news/feed/"), "News");
-        adapter.addFragment(ListContentFragment.newInstance("http://www.newuniversity.org/category/entertainment/feed/"), "Entertainment");
+        adapter.addFragment(ListContentFragment.newInstance("http://www.newuniversity.org/category/entertainment/feed/"), "A & E");
         adapter.addFragment(ListContentFragment.newInstance("http://www.newuniversity.org/category/features/feed/"), "Features");
         adapter.addFragment(ListContentFragment.newInstance("http://www.newuniversity.org/category/sports/feed/"), "Sports");
         adapter.addFragment(ListContentFragment.newInstance("http://www.newuniversity.org/category/opinion/feed/"), "Opinion");

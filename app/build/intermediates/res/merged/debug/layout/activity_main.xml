@@ -37,35 +37,33 @@
                 android:layout_width="match_parent"
                 app:titleTextColor="@color/White"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
+                android:background="@color/KUCIToolbar"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/KUCITheme" />
 
         </android.support.design.widget.AppBarLayout>
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:background="@color/White"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
-        <ImageButton
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+            <ImageButton
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@drawable/button_layout_second"
             android:src="@drawable/playbutton"
             android:tint="@color/White"
             android:textStyle="bold"
+                android:padding="10dp"
             android:textAllCaps="false"
             android:id="@+id/fab"
-            android:layout_gravity="center_horizontal" />
-
+            android:layout_gravity="center" />
+            </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +74,7 @@
                 android:paddingTop="10dp"
                 android:fontFamily="sans-serif"
                 android:textSize="35dp"
-                android:textColor="@color/Gray"
+                android:textColor="@color/Navy"
                 android:id="@+id/textView"
                 android:layout_gravity="center_horizontal" />
             <TextView
@@ -89,11 +87,19 @@
                 android:paddingTop="10dp"
                 android:fontFamily="sans-serif"
                 android:textSize="20dp"
-                android:textColor="@color/Gray"
+                android:textColor="@color/Navy"
                 android:id="@+id/showName"
                 android:layout_gravity="center_horizontal" />
         </LinearLayout>
-
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/schedules"
+            android:background="@color/KUCIToolbar"
+            android:textColor="@color/White"
+            android:textStyle="bold"
+            android:text="View Schedules"
+            android:layout_gravity="bottom"/>
     </android.support.design.widget.CoordinatorLayout>
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -103,6 +109,7 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/navheader"
         app:menu="@menu/menu_navigation"/>
+
 </android.support.v4.widget.DrawerLayout>
 
 

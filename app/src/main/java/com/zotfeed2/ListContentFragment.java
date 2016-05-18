@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
+import android.net.wifi.WifiConfiguration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -54,7 +55,9 @@ import java.util.Set;
 public class ListContentFragment extends Fragment {
     RecyclerView recyclerView;
     private String link;
+    ProgressDialog dialog = null;
     private final static String LINK_PARAM = "link";
+    ArrayList<Article> feeds = new ArrayList<Article>();
     public static ListContentFragment newInstance(String link){
         ListContentFragment fragment = new ListContentFragment();
         Bundle bundle = new Bundle();
@@ -74,12 +77,17 @@ public class ListContentFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_view, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+        RSSFeedController controller = null;
         if(link != null) {
 
             System.out.println(link +"link here!!!");
-            RSSFeedController controller = new RSSFeedController(link);
+            controller = new RSSFeedController(link);
             controller.execute();
-
+            dialog = new ProgressDialog(getContext());
+            if(feeds.isEmpty()) {
+                dialog.setMessage("Loading New University Articles");
+                dialog.show();
+            }
         }
         return view;
     }
@@ -133,7 +141,7 @@ public class ListContentFragment extends Fragment {
             final Article article = list.get(position);
             holder.title.setText(article.getTitle());
             holder.description.setText(article.getDescription());
-            holder.thumbnail.setImageResource(R.mipmap.ic_launcher);
+            holder.thumbnail.setImageResource(R.drawable.newu_icon);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -155,7 +163,6 @@ public class ListContentFragment extends Fragment {
     class RSSFeedController extends AsyncTask<String, Void, ArrayList<Article>> {
         //ProgressDialog dialog;
         Article article = new Article();
-        ArrayList<Article> feeds = new ArrayList<Article>();
         HttpURLConnection conn;
         InputStream stream;
         URL url;
@@ -235,6 +242,7 @@ public class ListContentFragment extends Fragment {
         protected void onPostExecute(ArrayList<Article> result) {
             if(result != null) {
                 System.out.println("Done");
+                dialog.dismiss();
                 recyclerView.setAdapter(new ContentAdapter(result));
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

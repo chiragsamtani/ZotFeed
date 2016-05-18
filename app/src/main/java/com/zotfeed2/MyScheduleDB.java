@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by CHIRAG on 4/24/2016.
  */
@@ -101,4 +104,24 @@ public class MyScheduleDB extends SQLiteOpenHelper {
         db.close();
         return showName;
     }
-}
+    public ArrayList<Schedule> getScheduleOfDay(String day){
+        String sql = String.format("SELECT DISTINCT(showName), start_time, end_time, dayOfWeek FROM schedule WHERE dayOfWeek =  '" + day + "' ORDER BY start_time;");
+        ArrayList<Schedule> schedules = new ArrayList<Schedule>();;
+        SQLiteDatabase db = openDb();
+        Cursor cursor = db.rawQuery(sql, null);
+        if(cursor.moveToFirst()){
+            while(!cursor.isAfterLast()){
+                Schedule schedule = new Schedule();
+                schedule.setShowName(cursor.getString(cursor.getColumnIndex("showName")));
+                schedule.setDay(cursor.getString(cursor.getColumnIndex("dayOfWeek")));
+                schedule.setStartTime(cursor.getInt(cursor.getColumnIndex("start_time")));
+                schedule.setEndTime(cursor.getInt(cursor.getColumnIndex("end_time")));
+                schedules.add(schedule);
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        db.close();
+        return schedules;
+    }
+ }

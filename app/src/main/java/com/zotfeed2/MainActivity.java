@@ -1,17 +1,25 @@
 package com.zotfeed2;
 
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.JsonReader;
+import android.view.DragEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -46,14 +54,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 public class MainActivity extends AppCompatActivity {
+    private boolean starting = true;
     private boolean playing = false;
-    private boolean started = true;
     private ImageButton button;
     private String url = "http://streamer.kuci.org:8000/high";
     private MediaPlayer mediaPlayer;
     private TextView currentShow;
+    private Button scheduleButton;
+    private ImageButton stopButton;
     private DrawerLayout mDrawerLayout;
     private MyScheduleDB db;
+    private RadioService radioService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +74,6 @@ public class MainActivity extends AppCompatActivity {
         // Adding Toolbar to Main screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        // Setting ViewPager for each Tabs
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-
-        // Set Tabs inside Toolbar
-//        TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-//        tabs.setupWithViewPager(viewPager);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
 
@@ -117,27 +120,36 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //cannot play it multiple times
-                if (!playing) {
-                    button.setImageResource(R.drawable.pausebutton);
-                    if (started)
-                        new startRadio().execute(url);
-                    else {
-                        if (mediaPlayer.isPlaying()) {
-                            mediaPlayer.start();
-                        }
-                    }
-                    playing = true;
-                } else {
-                    //if mediaplayer is currently playing
-                    button.setImageResource(R.drawable.playbutton);
-                    if (mediaPlayer.isPlaying()) {
-                        mediaPlayer.pause();
-                    }
-                    playing = false;
+                //cannot play it multiple times)
+                if(button.getTag() == 1 && !playing){
+                    button.setEnabled(false);
+                }else{
+                    button.setEnabled(true);
+                    goToService();
                 }
+
+                //      PendingIntent pIntent = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(getApplicationContext(), ))
+                //startRadio() - already invokes mp.start()
+                //check if mediaPlayer is Playing
+//                    if (mediaPlayer.isPlaying()) {
+//                        mediaPlayer.pause();
+//                        button.setImageResource(R.drawable.playbutton);
+//                    } else {
+//                        mediaPlayer.start();
+//                        button.setImageResource(R.drawable.pausebutton);
+//                    }
+
             }
         });
+
+//        stopButton = (ImageButton) findViewById(R.id.stop);
+//        stopButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                stopRadioService();
+//            }
+//        });
+
         Date now = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("K");
         String formattedTime = sdf.format(now);
@@ -147,193 +159,237 @@ public class MainActivity extends AppCompatActivity {
         currentShow = (TextView) findViewById(R.id.showName);
         String showName = db.getScheduleInfo(getDayInString(day), currTime);
         currentShow.setText(showName);
-    }
 
-    // Add Fragments to Tabs
-    private void setupViewPager(ViewPager viewPager) {
-        Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new SlidingFragment(), "Listen");
-        adapter.addFragment(new SlidingFragment(), "Schedule");
-        viewPager.setAdapter(adapter);
-    }
 
-    static class Adapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public Adapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
-
-        class startRadio extends AsyncTask<String, Void, Boolean> {
+        //view schedules button
+        scheduleButton = (Button) findViewById(R.id.schedules);
+        scheduleButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected Boolean doInBackground(String... params) {
-                mediaPlayer = new MediaPlayer();
-                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                try {
-                    mediaPlayer.setDataSource(params[0]);
-                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer mp) {
-                            mediaPlayer.start();
-                            Toast.makeText(getApplicationContext(), "Stream has started", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        @Override
-                        public void onCompletion(MediaPlayer mp) {
-                            started = false;
-                            mediaPlayer.stop();
-                            mediaPlayer.release();
-                            Toast.makeText(getApplicationContext(), "Stream is no longer active", Toast.LENGTH_LONG).show();
-                            button.setBackgroundResource(R.drawable.playbutton);
-                            mediaPlayer = null;
-                        }
-                    });
-                    mediaPlayer.prepareAsync();
-                } catch (IOException e) {
-                    Toast.makeText(getApplicationContext(), "Error Occured In Handling Radio", Toast.LENGTH_SHORT).show();
-                    return false;
-                }
+            public void onClick(View v) {
+                final Intent intent = new Intent(getApplicationContext(), ViewSchedules.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void startRadio(final String url) {
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        try {
+            mediaPlayer.setDataSource(url);
+            mediaPlayer.prepareAsync();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mp.start();
+            }
+        });
+        mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                if(what == MediaPlayer.MEDIA_ERROR_SERVER_DIED)
+                    mp.reset();
+                else if(what == MediaPlayer.MEDIA_ERROR_TIMED_OUT)
+                    mp.reset();
+                startRadio(url);
                 return true;
             }
-
-
+        });
+    }
+    public void stopRadio(){
+        if (mediaPlayer != null){
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
+    }
 
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            // Inflate the menu; this adds items to the action bar if it is present.
-            getMenuInflater().inflate(R.menu.menu_main, menu);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
             return true;
+        } else if (id == android.R.id.home) {
+            mDrawerLayout.openDrawer(GravityCompat.START);
         }
+        return super.onOptionsItemSelected(item);
+    }
 
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
-            //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {
-                return true;
-            } else if (id == android.R.id.home) {
-                mDrawerLayout.openDrawer(GravityCompat.START);
-            }
-            return super.onOptionsItemSelected(item);
-        }
-
-        public void readJsonStream(InputStream in) throws IOException {
-            JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-            try {
-                reader.beginArray();
-                while (reader.hasNext()) {
-                    readObject(reader);
-                }
-                reader.endArray();
-            } finally {
-                reader.close();
-            }
-        }
-
-        public void readObject(JsonReader reader) throws IOException {
-            Schedule schedule;
-            MyScheduleDB db = new MyScheduleDB(this, "Schedules", 1);
-            String showName = "";
-            String start_time = "";
-            String end_time = "";
-            String day = "";
-            int startTime = -1;
-            int endTime = -1;
-            reader.beginObject();
-
+    public void readJsonStream(InputStream in) throws IOException {
+        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+        try {
+            reader.beginArray();
             while (reader.hasNext()) {
-                String tag = reader.nextName();
-                if (tag.equals("title")) {
-                    showName = reader.nextString();
-                } else if (tag.equals("start_time")) {
-                    start_time = reader.nextString();
-                    int index = start_time.indexOf(":");
-                    start_time = start_time.substring(0, index);
-                    //System.out.println(start_time);
-                } else if (tag.equals("end_time")) {
-                    end_time = reader.nextString();
-                    int index = end_time.indexOf(":");
-                    end_time = end_time.substring(0, index);
-                    //System.out.println(end_time);
-                } else if (tag.equals("day")) {
-                    day = reader.nextString();
-                } else {
-                    reader.skipValue();
-                }
-                if (!start_time.isEmpty() || !start_time.equals("")) {
-                    startTime = Integer.parseInt(start_time);
-                    System.out.println(startTime);
-                }
-                if (!end_time.isEmpty() || !end_time.equals("")) {
-                    endTime = Integer.parseInt(end_time);
-                }
+                readObject(reader);
+            }
+            reader.endArray();
+        } finally {
+            reader.close();
+        }
+    }
+
+    public void readObject(JsonReader reader) throws IOException {
+        Schedule schedule;
+        MyScheduleDB db = new MyScheduleDB(this, "Schedules", 1);
+        String showName = "";
+        String start_time = "";
+        String end_time = "";
+        String day = "";
+        String hosts = "";
+        String description = "";
+        int startTime = -1;
+        int endTime = -1;
+        reader.beginObject();
+
+        while (reader.hasNext()) {
+            String tag = reader.nextName();
+            if (tag.equals("title")) {
+                showName = reader.nextString();
+            } else if (tag.equals("start_time")) {
+                start_time = reader.nextString();
+                int index = start_time.indexOf(":");
+                start_time = start_time.substring(0, index);
+                //System.out.println(start_time);
+            } else if (tag.equals("end_time")) {
+                end_time = reader.nextString();
+                int index = end_time.indexOf(":");
+                end_time = end_time.substring(0, index);
+                //System.out.println(end_time);
+            } else if (tag.equals("day")) {
+                day = reader.nextString();
+            } else {
+                reader.skipValue();
+            }
+            if (!start_time.isEmpty() || !start_time.equals("")) {
+                startTime = Integer.parseInt(start_time);
+                System.out.println(startTime);
+            }
+            if (!end_time.isEmpty() || !end_time.equals("")) {
+                endTime = Integer.parseInt(end_time);
+            }
 
 
 //            System.out.println(endTime);
-                schedule = new Schedule(showName, day, startTime, endTime);
-                if (db.insertSchedule(schedule)) {
-                    System.out.println("Good");
-                }
+            schedule = new Schedule(showName, day, startTime, endTime);
+            if (db.insertSchedule(schedule)) {
+                System.out.println("Good");
             }
-            reader.endObject();
         }
+        reader.endObject();
+    }
 
-        private String getDayInString(int day) {
-            String dayinStr = "";
-            switch (day) {
-                case Calendar.SUNDAY:
-                    dayinStr = "Sunday";
-                    break;
-                case Calendar.MONDAY:
-                    dayinStr = "Monday";
-                    break;
-                case Calendar.TUESDAY:
-                    dayinStr = "Tuesday";
-                    break;
-                case Calendar.WEDNESDAY:
-                    dayinStr = "Wednesday";
-                    break;
-                case Calendar.THURSDAY:
-                    dayinStr = "Thursday";
-                    break;
-                case Calendar.FRIDAY:
-                    dayinStr = "Friday";
-                    break;
-                case Calendar.SATURDAY:
-                    dayinStr = "Saturday";
-                    break;
-            }
-            return dayinStr;
+    private String getDayInString(int day) {
+        String dayinStr = "";
+        switch (day) {
+            case Calendar.SUNDAY:
+                dayinStr = "Sunday";
+                break;
+            case Calendar.MONDAY:
+                dayinStr = "Monday";
+                break;
+            case Calendar.TUESDAY:
+                dayinStr = "Tuesday";
+                break;
+            case Calendar.WEDNESDAY:
+                dayinStr = "Wednesday";
+                break;
+            case Calendar.THURSDAY:
+                dayinStr = "Thursday";
+                break;
+            case Calendar.FRIDAY:
+                dayinStr = "Friday";
+                break;
+            case Calendar.SATURDAY:
+                dayinStr = "Saturday";
+                break;
         }
+        return dayinStr;
+    }
     private static boolean doesDatabaseExist(Context context) {
         File dbFile = context.getDatabasePath("Schedules");
         return dbFile.exists();
+    }
+    private void goToService(){
+        Intent intent = new Intent();
+        intent.setClass(this, RadioService.class);
+        if(!playing){
+            bindService(intent, connection, getApplicationContext().BIND_AUTO_CREATE);
+            button.setImageResource(R.drawable.pausebutton);
+            button.setTag(1);
+            startService(intent);
+            playing = true;
+        }
+        else{
+            button.setTag(2);
+            radioService.pauseStream();
+            playing = false;
+            button.setImageResource(R.drawable.playbutton);
+            unbindService(connection);
+        }
+//        showNotifcation();
+    }
+    private void stopRadioService(){
+        Intent intent = new Intent();
+        intent.setClass(this, RadioService.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        if(playing){
+            playing = false;
+            unbindService(connection);
+            button.setImageResource(R.drawable.playbutton);
+            stopService(intent);
+        }else{
+            button.setImageResource(R.drawable.playbutton);
+            stopService(intent);
+        }
+
+    }
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(playing){
+            unbindService(connection);
+            playing = false;
+        }
+    }
+
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            radioService = ((RadioService.LocalBinder) service).getService();
+            playing = true;
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            playing = false;
+        }
+    };
+    private void  showNotifcation(){
+        synchronized (MainActivity.class) {
+            Intent serviceIntent = new Intent(this, RadioService.class);
+            PendingIntent pIntent = PendingIntent.getService(getApplicationContext(), 0, serviceIntent, PendingIntent.FLAG_ONE_SHOT);
+            Notification notification = new Notification();
+            notification.tickerText = currentShow.getText().toString();
+            notification.flags = Notification.FLAG_ONGOING_EVENT;
+            notification.contentIntent = pIntent;
+            notification.notify();
+        }
+
     }
 }

@@ -71,10 +71,8 @@
     <color name="DeepSkyBlue">#00BFFF</color>
     <color name="DimGray">#696969</color>
     <color name="DodgerBlue">#1E90FF</color>
-    <color name="FashionButton">@color/PinkCardColor</color>
     <color name="FireBrick">#B22222</color>
     <color name="FloralWhite">#FFFAF0</color>
-    <color name="FoodButton">@color/GreenCardColor</color>
     <color name="ForestGreen">#228B22</color>
     <color name="FrameBackground">@color/White</color>
     <color name="FrameColor">@color/WhiteSmoke</color>
@@ -93,11 +91,11 @@
     <color name="GreenYellow">#ADFF2F</color>
     <color name="Honeydew">#F0FFF0</color>
     <color name="HotPink">#FF69B4</color>
-    <color name="HotelsButton">@color/BlueCardColor</color>
     <color name="ImageButtonBackground">@color/Transparent</color>
     <color name="IndianRed">#CD5C5C</color>
     <color name="Indigo">#4B0082</color>
     <color name="Ivory">#FFFFF0</color>
+    <color name="KUCIToolbar">#1b3d6d</color>
     <color name="Khaki">#F0E68C</color>
     <color name="Lavender">#E6E6FA</color>
     <color name="LavenderBlush">#FFF0F5</color>
@@ -124,7 +122,6 @@
     <color name="Magenta">#FF00FF</color>
     <color name="MainColor">@color/DarkRed</color>
     <color name="Maroon">#800000</color>
-    <color name="MedicalButton">@color/RedCardColor</color>
     <color name="MediumAquamarine">#66CDAA</color>
     <color name="MediumBlue">#0000CD</color>
     <color name="MediumOrchid">#BA55D3</color>
@@ -140,6 +137,8 @@
     <color name="Moccasin">#FFE4B5</color>
     <color name="NavajoWhite">#FFDEAD</color>
     <color name="Navy">#000080</color>
+    <color name="NewUTabs">#c6beb5</color>
+    <color name="NewUToolbar">#6aa2b8</color>
     <color name="OldLace">#FDF5E6</color>
     <color name="Olive">#808000</color>
     <color name="OliveDrab">#6B8E23</color>
@@ -150,7 +149,6 @@
     <color name="OrangeCardGradient">@color/LightYellow</color>
     <color name="OrangeRed">#FF4500</color>
     <color name="Orchid">#DA70D6</color>
-    <color name="OthersButton">@color/YellowCardColor</color>
     <color name="PaleGoldenrod">#EEE8AA</color>
     <color name="PaleGreen">#98FB98</color>
     <color name="PaleTurquoise">#AFEEEE</color>
@@ -173,6 +171,8 @@
     <color name="SaddleBrown">#8B4513</color>
     <color name="Salmon">#FA8072</color>
     <color name="SandyBrown">#F4A460</color>
+    <color name="ScheduleTab">#555759</color>
+    <color name="ScheduleToolbar">#1b3d6d</color>
     <color name="SeaGreen">#2E8B57</color>
     <color name="Seashell">#FFF5EE</color>
     <color name="SemiTransparent">#11FFFFFF</color>
@@ -183,7 +183,6 @@
     <color name="SlateBlue">#6A5ACD</color>
     <color name="SlateGray">#708090</color>
     <color name="Snow">#FFFAFA</color>
-    <color name="SportsButton">@color/OrangeCardColor</color>
     <color name="SpringGreen">#00FF7F</color>
     <color name="StatusBar">@color/White</color>
     <color name="SteelBlue">#4682B4</color>
@@ -413,7 +412,8 @@
     <dimen name="app_bar_height">256dp</dimen>
     <dimen name="article_keylines">72dp</dimen>
     <dimen name="article_subheading">16sp</dimen>
-    <dimen name="article_titles">20sp</dimen>
+    <dimen name="article_subs">15sp</dimen>
+    <dimen name="article_titles">25sp</dimen>
     <dimen name="avator_size">40dp</dimen>
     <dimen name="card_height">304dp</dimen>
     <dimen name="card_image_height">200dp</dimen>
@@ -454,6 +454,7 @@
     <dimen name="design_tab_text_size_2line">12sp</dimen>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
+    <dimen name="fab_margin">16dp</dimen>
     <item format="float" name="highlight_alpha_material_colored" type="dimen">0.26</item>
     <item format="float" name="highlight_alpha_material_dark" type="dimen">0.20</item>
     <item format="float" name="highlight_alpha_material_light" type="dimen">0.12</item>
@@ -461,8 +462,8 @@
     <dimen name="item_touch_helper_swipe_escape_max_velocity">800dp</dimen>
     <dimen name="item_touch_helper_swipe_escape_velocity">120dp</dimen>
     <dimen name="list_body">14sp</dimen>
-    <dimen name="md_keylines">16dp</dimen>
-    <dimen name="navheader_height">222dp</dimen>
+    <dimen name="md_keylines">9dp</dimen>
+    <dimen name="navheader_height">100dp</dimen>
     <dimen name="notification_large_icon_height">64dp</dimen>
     <dimen name="notification_large_icon_width">64dp</dimen>
     <dimen name="notification_subtext_size">12dp</dimen>
@@ -533,6 +534,8 @@
     <string name="title_activity_anteater_tv">AnteaterTvActivity</string>
     <string name="title_activity_new_university">NewUniversity</string>
     <string name="title_activity_schedule">ScheduleActivity</string>
+    <string name="title_activity_schedule_pop_up">SchedulePopUp</string>
+    <string name="title_activity_view_schedules">ViewSchedules</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>
@@ -1697,6 +1700,9 @@
     <style name="RtlUnderlay.Widget.AppCompat.ActionButton.Overflow" parent="Base.Widget.AppCompat.ActionButton">
         <item name="android:paddingLeft">@dimen/abc_action_bar_overflow_padding_start_material</item>
         <item name="android:paddingRight">@dimen/abc_action_bar_overflow_padding_end_material</item>
+    </style>
+    <style name="TabText">
+        <item name="android:textSize">10dp</item>
     </style>
     <style name="TextAppearance.AppCompat" parent="Base.TextAppearance.AppCompat"/>
     <style name="TextAppearance.AppCompat.Body1" parent="Base.TextAppearance.AppCompat.Body1"/>

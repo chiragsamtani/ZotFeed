@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@id/drawer"
+    android:id="@+id/drawer"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.zotfeed2.NewUniversityActivity">
@@ -14,36 +14,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/NewUniversityTheme">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
-            app:titleTextColor="@color/White"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/NewUniversityTheme" />
+            android:layout_height="wrap_content"
+            android:theme="@style/NewUniversityTheme">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            app:tabSelectedTextColor="@color/White"
-            app:tabTextColor="@color/White"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                app:titleTextColor="@color/White"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/NewUToolbar"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/NewUniversityTheme" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabs"
+                app:tabSelectedTextColor="@color/White"
+                app:tabTextColor="@color/White"
+                android:layout_width="match_parent"
+                android:background="@color/NewUTabs"
+                android:layout_height="wrap_content"
+                app:tabTextAppearance="@style/TabText"
+                />
+
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:background="@color/White"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:background="@color/White"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </android.support.design.widget.CoordinatorLayout>
 

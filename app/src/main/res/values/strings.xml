@@ -20,4 +20,6 @@
     <string name="nav_anteatertv">AnteaterTV</string>
     <string name="nav_newuniversity">New University</string>
     <string name="nav_kuci">KUCI</string>
+    <string name="title_activity_view_schedules">ViewSchedules</string>
+    <string name="title_activity_schedule_pop_up">SchedulePopUp</string>
 </resources>

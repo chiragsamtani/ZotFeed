@@ -96,12 +96,11 @@
 
 
 <!-- MAIN MENU -->
-<color name="FashionButton">@color/PinkCardColor</color>
-<color name="FoodButton">@color/GreenCardColor</color>
-<color name="MedicalButton">@color/RedCardColor</color>
-<color name="HotelsButton">@color/BlueCardColor</color>
-<color name="SportsButton">@color/OrangeCardColor</color>
-<color name="OthersButton">@color/YellowCardColor</color>
+<color name="KUCIToolbar">#1b3d6d</color>
+    <color name="ScheduleToolbar">#1b3d6d</color>
+    <color name="ScheduleTab">#555759</color>
+<color name="NewUToolbar">#6aa2b8</color>
+<color name="NewUTabs">#c6beb5</color>
 
 <color name="UntouchedButton">@color/Gray</color>
 

@@ -54,6 +54,8 @@ public class ScheduleActivity extends AppCompatActivity {
         Schedule schedule;
         MyScheduleDB db = new MyScheduleDB(this, "Schedules", 1);
         String showName = "";
+        String hosts = "";
+        String description = "";
         String start_time = "";
         String end_time = "";
         String day = "";
@@ -80,6 +82,12 @@ public class ScheduleActivity extends AppCompatActivity {
             }
             else if(tag.equals("day")){
                 day = reader.nextString();
+            }
+            else if(tag.equals("hosts")){
+                hosts = reader.nextString();
+            }
+            else if(tag.equals("description")){
+                description = reader.nextString();
             }
             else{
                 reader.skipValue();

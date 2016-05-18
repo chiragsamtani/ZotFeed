@@ -77,13 +77,14 @@ public class AnteaterTvActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         // Set item in checked state
                         if(menuItem.getTitle().equals("New University")){
-                            //do nothing for now
+                            Intent intent = new Intent(getApplicationContext(), NewUniversityActivity.class);
+                            startActivity(intent);
                         }else if(menuItem.getTitle().equals("KUCI")){
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         }
                         else if(menuItem.getTitle().equals("AnteaterTV")){
-                            Intent intent = new Intent(getApplicationContext(), ScheduleActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), AnteaterTvActivity.class);
                             startActivity(intent);
                         }
                         menuItem.setChecked(true);
