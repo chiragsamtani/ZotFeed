@@ -179,10 +179,11 @@ public class SchFragment extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     Intent intent = new Intent(getContext(), SchedulePopUp.class);
                     intent.putExtra("showName", schedule.getShowName());
-                    intent.putExtra("day", schedule.getDay());
+                    intent.putExtra("artists", schedule.getHosts());
+                    intent.putExtra("description", schedule.getDesc());
+                    intent.putExtra("url", schedule.getURL());
 //                    intent.putExtra("time", tempStart+am_pm+" - " + tempEnd+am_pm);
                     startActivity(intent);
                 }

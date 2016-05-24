@@ -196,6 +196,10 @@
         "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\navheader.xml"
     },
     {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_layout.xml",
+        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\notification_layout.xml"
+    },
+    {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_popup_menu_item_layout.xml"
     },

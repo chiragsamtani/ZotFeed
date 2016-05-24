@@ -17,6 +17,9 @@
 package com.zotfeed2;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
@@ -26,10 +29,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.Layout;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -56,8 +64,11 @@ public class ListContentFragment extends Fragment {
     RecyclerView recyclerView;
     private String link;
     ProgressDialog dialog = null;
+    private ContentAdapter adapter;
     private final static String LINK_PARAM = "link";
     ArrayList<Article> feeds = new ArrayList<Article>();
+    ArrayList<Article> results = new ArrayList<Article>();
+    private boolean search = false;
     public static ListContentFragment newInstance(String link){
         ListContentFragment fragment = new ListContentFragment();
         Bundle bundle = new Bundle();
@@ -70,6 +81,13 @@ public class ListContentFragment extends Fragment {
         super.onCreate(savedInstanceState);
         link = getArguments().getString(LINK_PARAM);
 
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setHasOptionsMenu(true);
+        System.out.println("onviewcreated");
     }
 
     @Override
@@ -87,11 +105,62 @@ public class ListContentFragment extends Fragment {
             if(feeds.isEmpty()) {
                 dialog.setMessage("Loading New University Articles");
                 dialog.show();
+            }else if(search){
+                recyclerView.setAdapter(new ContentAdapter(feeds));
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
         }
+        setHasOptionsMenu(true);
+        System.out.println("onCreate");
         return view;
     }
+    @Override
+    public void onCreateOptionsMenu (Menu menu, MenuInflater inflater){
+        inflater.inflate(R.menu.menu_newu, menu);
+//        MenuItem item = menu.findItem(R.id.action_search);
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView sv = (SearchView) MenuItemCompat.getActionView(searchItem);
+        sv.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                System.out.print("QUERY:" + query);
+                results = new ArrayList<Article>();
+                if(!feeds.isEmpty() || feeds != null){
+                    for(Article article : feeds){
+                        //System.out.println("Title: " + article.getTitle());
+                        if(article.getTitle().toLowerCase().contains(query.toLowerCase())){
+                            results.add(article);
+                            System.out.println("Results: " + article.getTitle());
+                        }
+                    }
+                    System.out.println("Size: " + results.size());
+                    search = true;
+                    recyclerView.setAdapter(new ContentAdapter(results));
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.isEmpty() || newText.equals(" ")){
+                    if(feeds != null) {
+                        recyclerView.setAdapter(new ContentAdapter(feeds));
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    }
+                }
+                return false;
+            }
+        });
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -243,7 +312,8 @@ public class ListContentFragment extends Fragment {
             if(result != null) {
                 System.out.println("Done");
                 dialog.dismiss();
-                recyclerView.setAdapter(new ContentAdapter(result));
+                adapter = new ContentAdapter(result);
+                recyclerView.setAdapter(adapter);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }

@@ -15,6 +15,8 @@ public class Schedule {
     private String hosts;
     private String description;
     private String day;
+    private String url;
+    private String genre;
     public Schedule(){
         this.showName = "";
         this.day = "";
@@ -22,14 +24,26 @@ public class Schedule {
         this.end_time = -1;
         this.hosts = "";
         this.description = "";
+        this.url = "";
+        this.genre = "";
     }
-    public Schedule(String showName, String day, int start_time, int end_time){
+    public Schedule(String showName, String day, int start_time, int end_time, String host, String desc, String uri, String genr){
         this.showName = showName;
         this.day = day;
         this.start_time = start_time;
         this.end_time = end_time;
+        this.hosts = host;
+        this.description = desc;
+        this.url = uri;
+        this.genre = genr;
 //        this.hosts = hosts;
 //        this.description = description;
+    }
+    public void setURL(String url){
+        this.url = url;
+    }
+    public void setGenre(String genre){
+        this.genre = genre;
     }
     public void setHosts(String host){
         this.hosts = host;
@@ -63,6 +77,11 @@ public class Schedule {
     }
     public String getHosts() {return hosts;}
     public String getDesc(){ return description;}
+    public String getURL(){return url;
+    }
+    public String getGenre(){
+        return genre;
+    }
     public static void main(String[] args){
 
     }

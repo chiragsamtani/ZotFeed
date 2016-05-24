@@ -530,6 +530,7 @@
     <string name="nav_newuniversity">New University</string>
     <string name="new_u_desc">Article Description</string>
     <string name="new_u_title">Article Title</string>
+    <string name="searchbar">"Search"</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <string name="title_activity_anteater_tv">AnteaterTvActivity</string>
     <string name="title_activity_new_university">NewUniversity</string>

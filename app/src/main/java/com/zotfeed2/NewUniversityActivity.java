@@ -1,5 +1,7 @@
 package com.zotfeed2;
 
+import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -13,6 +15,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +24,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.support.v7.widget.SearchView;
 import android.widget.TabHost;
 import android.widget.Toast;
 
@@ -61,6 +66,8 @@ public class NewUniversityActivity extends AppCompatActivity {
     private Activity activity;
     private ViewPager viewPager;
     private TabLayout tabs;
+    private String getQuery;
+    private EditText text;
     private static ArrayList<Article> feeds = new ArrayList<Article>();
 
     @Override
@@ -78,7 +85,6 @@ public class NewUniversityActivity extends AppCompatActivity {
         // Create Navigation drawer and inflate layout
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-
 
         // Adding menu icon to Toolbar
         ActionBar supportActionBar = getSupportActionBar();
@@ -112,8 +118,14 @@ public class NewUniversityActivity extends AppCompatActivity {
                         return true;
                     }
                 });
-    }
 
+        searchIntent(getIntent());
+
+    }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        searchIntent(intent);
+    }
     // Add Fragments to Tabs
     private void setupViewPager(final ViewPager viewPager) {
         final Adapter adapter = new Adapter(getSupportFragmentManager());
@@ -234,6 +246,10 @@ public class NewUniversityActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        MenuItem searchitem = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchitem);
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(getApplicationContext(), NewUniversityActivity.class)));
         return true;
     }
 
@@ -250,5 +266,20 @@ public class NewUniversityActivity extends AppCompatActivity {
             mDrawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void searchIntent(Intent intent) {
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            getQuery = query;
+//            Bundle bundle = new Bundle();
+//            bundle.putString("query", query);
+//            ListContentFragment fragment = new ListContentFragment();
+//            fragment.setArguments(bundle);
+//            //use the query to search your data somehow
+        }
+    }
+    public String getQueryData(){
+        return getQuery;
     }
 }

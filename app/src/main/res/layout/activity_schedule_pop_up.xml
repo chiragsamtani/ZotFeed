@@ -92,7 +92,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
-                android:id="@+id/start_time"
+                android:id="@+id/link"
+                android:autoLink="web"
                 android:text="Article Title"
                 android:textSize="@dimen/article_subs"
                 android:layout_marginBottom="@dimen/md_keylines" />

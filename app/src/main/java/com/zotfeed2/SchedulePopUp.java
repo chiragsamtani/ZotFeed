@@ -1,5 +1,7 @@
 package com.zotfeed2;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -15,7 +17,7 @@ public class SchedulePopUp extends AppCompatActivity {
 
     TextView artists;
     TextView description;
-    TextView start_time;
+    TextView link;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,16 +26,35 @@ public class SchedulePopUp extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set Collapsing Toolbar layout to the screen
+
+//        intent.putExtra("artists", schedule.getHosts());
+//        intent.putExtra("description", schedule.getDesc());
+//        intent.putExtra("url", schedule.getURL());
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbar.setTitle(getIntent().getStringExtra("showName"));
         artists = (TextView) findViewById(R.id.artists);
-        artists.setText("Various KUCI Artists");
+        artists.setText("Artists: " + getIntent().getStringExtra("artists"));
 
         description = (TextView) findViewById(R.id.description);
-        description.setText("This is a short description of the show");
+        description.setText("Description: " + getIntent().getStringExtra("description"));
 
-        start_time = (TextView) findViewById(R.id.start_time);
-        start_time.setText(getIntent().getStringExtra("day") + ", " + getIntent().getStringExtra("time"));
+        link = (TextView) findViewById(R.id.link);
+        String linkToArtist = getIntent().getStringExtra("url");
+        if(linkToArtist.isEmpty() || linkToArtist.equals(" ")){
+            link.setText("Get More Info: " + linkToArtist);
+        }else{
+            link.setText("");
+        }
+        link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(getIntent().getStringExtra("url")));
+                startActivity(intent);
+
+            }
+        });
 
         // Set title of Detail page
         String title = getIntent().getStringExtra("showName");

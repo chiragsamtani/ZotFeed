@@ -29,6 +29,10 @@ public class MyScheduleDB extends SQLiteOpenHelper {
             sql += "showName TEXT, ";
             sql += "start_time INTEGER, ";
             sql += "end_time INTEGER, ";
+            sql += "description TEXT, ";
+            sql += "URL TEXT, ";
+            sql += "genre TEXT, ";
+            sql += "hosts TEXT, ";
             sql += "dayOfWeek TEXT)";
             db.execSQL(sql);
         }catch(Exception e){
@@ -76,6 +80,10 @@ public class MyScheduleDB extends SQLiteOpenHelper {
             contentValues.put("showName", schedule.getShowName());
             contentValues.put("start_time", schedule.getStartTime());
             contentValues.put("end_time", schedule.getEndTime());
+            contentValues.put("description", schedule.getDesc());
+            contentValues.put("URL", schedule.getURL());
+            contentValues.put("genre", schedule.getGenre());
+            contentValues.put("hosts", schedule.getHosts());
             contentValues.put("dayOfWeek", schedule.getDay());
             db.beginTransaction();
             try{
@@ -105,17 +113,21 @@ public class MyScheduleDB extends SQLiteOpenHelper {
         return showName;
     }
     public ArrayList<Schedule> getScheduleOfDay(String day){
-        String sql = String.format("SELECT DISTINCT(showName), start_time, end_time, dayOfWeek FROM schedule WHERE dayOfWeek =  '" + day + "' ORDER BY start_time;");
+        String sql = String.format("SELECT DISTINCT(showName), start_time, end_time, dayOfWeek, URL, genre, description, hosts FROM schedule WHERE dayOfWeek =  '" + day + "' ORDER BY start_time;");
         ArrayList<Schedule> schedules = new ArrayList<Schedule>();;
         SQLiteDatabase db = openDb();
         Cursor cursor = db.rawQuery(sql, null);
         if(cursor.moveToFirst()){
-            while(!cursor.isAfterLast()){
+            while(!cursor.isAfterLast()) {
                 Schedule schedule = new Schedule();
                 schedule.setShowName(cursor.getString(cursor.getColumnIndex("showName")));
                 schedule.setDay(cursor.getString(cursor.getColumnIndex("dayOfWeek")));
                 schedule.setStartTime(cursor.getInt(cursor.getColumnIndex("start_time")));
                 schedule.setEndTime(cursor.getInt(cursor.getColumnIndex("end_time")));
+                schedule.setHosts(cursor.getString(cursor.getColumnIndex("hosts")));
+                schedule.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                schedule.setGenre(cursor.getString(cursor.getColumnIndex("genre")));
+                schedule.setURL(cursor.getString(cursor.getColumnIndex("URL")));
                 schedules.add(schedule);
                 cursor.moveToNext();
             }

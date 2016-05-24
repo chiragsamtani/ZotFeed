@@ -31,10 +31,10 @@
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
-                app:tabSelectedTextColor="@color/White"
+                app:tabSelectedTextColor="@color/Black"
                 app:tabTextColor="@color/White"
                 android:layout_width="match_parent"
-                android:background="@color/NewUTabs"
+                android:background="@color/Gray"
                 android:layout_height="wrap_content"
                 app:tabTextAppearance="@style/TabText"
                 />
