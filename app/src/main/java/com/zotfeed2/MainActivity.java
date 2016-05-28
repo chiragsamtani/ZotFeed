@@ -12,6 +12,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
@@ -20,6 +21,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
@@ -60,6 +62,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private boolean playing = false;
+    private boolean binded = false;
     private static final String PLAY_PAUSE = "PLAY_PAUSE";
     private static final String STOP_RADIO = "STOP";
     private ImageButton button;
@@ -69,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private MyScheduleDB db;
     Constants constants;
-
+    CoordinatorLayout coordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_content);
         // Adding menu icon to Toolbar
         ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
@@ -131,13 +134,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                    new startRadio().execute(url);
-                if (!playing) {
-                    goToService();
-                   // button.setImageResource(R.drawable.pausebutton);
-                } else {
-                    stopRadioService();
-                   // button.setImageResource(R.drawable.playbutton);
-                }
+              if(constants.isNetworkAvailable()) {
+                  if (!playing) {
+                      goToService();
+                      // button.setImageResource(R.drawable.pausebutton);
+                  } else {
+                      stopRadioService();
+                      // button.setImageResource(R.drawable.playbutton);
+                  }
+              }else{
+                  final Snackbar snackbar = Snackbar.make(coordinatorLayout, "Not Connected to Network", Snackbar.LENGTH_LONG);
+                  snackbar.setAction("RETRY", new View.OnClickListener() {
+                              @Override
+                              public void onClick(View v) {
+                                    //refreshes the activity to try again
+                                    Intent intent = getIntent();
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                    snackbar.dismiss();
+                                    finish();
+                                    startActivity(intent);
+                              }
+                          });
+                  snackbar.setActionTextColor(Color.RED);
+                  snackbar.show();
+              }
             }
         });
 
@@ -194,7 +214,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy(){
-        stopRadioService();
+        if(binded) {
+            stopRadioService();
+         //   getApplicationContext().unbindService(connection);
+        }
         super.onDestroy();
 //        if(notifStarted){
 //            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
@@ -345,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void getNowPlaying() {
         if(!doesDatabaseExist(getApplicationContext())) {
-            if (isNetworkAvailable()) {
+            if (constants.isNetworkAvailable()) {
                 //final Map<String, String> params = new HashMap<String, String>();
                 RequestQueue queue = Volley.newRequestQueue(this);
                 String url = "http://www.kuci.org/schedule.json";
@@ -374,12 +397,13 @@ public class MainActivity extends AppCompatActivity {
                 };
                 queue.add(req);
             } else {
-                try {
-                    InputStream file = getResources().getAssets().open("schedule.json");
-                    readJsonStream(file);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                Snackbar.make(coordinatorLayout, "Not connected to Network! Cannot Load Schedules", Snackbar.LENGTH_LONG).show();
+//                try {
+//                    InputStream file = getResources().getAssets().open("schedule.json");
+//                    readJsonStream(file);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
             }
         }
             Date now = new Date();
@@ -392,13 +416,6 @@ public class MainActivity extends AppCompatActivity {
             String showName = db.getScheduleInfo(getDayInString(day), currTime);
             currentShow.setText(showName);
     }
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
     private void goToService(){
         playing = true;
         Intent intent = new Intent();
@@ -406,6 +423,7 @@ public class MainActivity extends AppCompatActivity {
        // intent.putExtra("playing", playing);
         intent.putExtra("currShow", currentShow.getText().toString());
         bindService(intent, connection, getApplicationContext().BIND_AUTO_CREATE);
+        binded = true;
         startService(intent);
         button.setImageResource(R.drawable.pausebutton);
 
@@ -418,6 +436,7 @@ public class MainActivity extends AppCompatActivity {
        // intent.putExtra("playing", playing);
         button.setImageResource(R.drawable.playbutton);
         unbindService(connection);
+        binded = false;
         stopService(intent);
 
 
@@ -427,12 +446,14 @@ public class MainActivity extends AppCompatActivity {
         public void onServiceConnected(ComponentName name, IBinder service) {
             radioService = ((RadioService.LocalBinder) service).getService();
             playing = true;
+            binded = true;
 
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             playing = false;
+            binded = false;
         }
     };
 

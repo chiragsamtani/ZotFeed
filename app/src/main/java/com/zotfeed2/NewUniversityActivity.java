@@ -272,14 +272,6 @@ public class NewUniversityActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             getQuery = query;
-//            Bundle bundle = new Bundle();
-//            bundle.putString("query", query);
-//            ListContentFragment fragment = new ListContentFragment();
-//            fragment.setArguments(bundle);
-//            //use the query to search your data somehow
         }
-    }
-    public String getQueryData(){
-        return getQuery;
     }
 }

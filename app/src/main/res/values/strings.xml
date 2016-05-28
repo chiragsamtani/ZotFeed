@@ -23,4 +23,6 @@
     <string name="nav_kuci">KUCI</string>
     <string name="title_activity_view_schedules">ViewSchedules</string>
     <string name="title_activity_schedule_pop_up">SchedulePopUp</string>
+    <string name="title_activity_web_view">WebViewActivity</string>
+    <string name="title_activity_view_articles">ViewArticle</string>
 </resources>

@@ -1,6 +1,9 @@
 package com.zotfeed2;
 
 import android.app.Application;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 /**
  * Created by CHIRAG on 5/23/2016.
@@ -16,6 +19,12 @@ public class Constants extends Application{
     public void onCreate(){
         super.onCreate();
 
+    }
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }

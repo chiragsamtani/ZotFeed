@@ -112,16 +112,20 @@
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_list_menu_item_radio.xml"
     },
     {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_view_article.xml",
+        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\content_view_article.xml"
+    },
+    {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_sheet_dialog.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\layout\\design_bottom_sheet_dialog.xml"
     },
     {
-        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar_include.xml",
-        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\layout\\design_layout_snackbar_include.xml"
-    },
-    {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar_include.xml",
+        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\layout\\design_layout_snackbar_include.xml"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_icon.xml",
@@ -222,6 +226,10 @@
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_main.xml",
         "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\content_main.xml"
+    },
+    {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_view_article.xml",
+        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\activity_view_article.xml"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_view_schedules.xml",

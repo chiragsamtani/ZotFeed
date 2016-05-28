@@ -22,6 +22,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.googleapis.json.GoogleJsonResponseException;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestInitializer;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.youtube.YouTube;
+//import com.google.api.services.samples.youtube.cmdline.Auth;
+import com.google.api.services.youtube.model.Channel;
+import com.google.api.services.youtube.model.ChannelListResponse;
+import com.google.api.services.youtube.model.PlaylistItem;
+import com.google.api.services.youtube.model.PlaylistItemListResponse;
+import com.google.api.services.youtube.model.PlaylistListResponse;
+import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +61,7 @@ import android.view.MenuItem;
 
 public class AnteaterTvActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
-
+    private static YouTube youtube;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,7 +181,48 @@ public class AnteaterTvActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public static void loadVideos(){
+        try{
+            youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
+                @Override
+                public void initialize(HttpRequest httpRequest) throws IOException {
+                }
+            }).setApplicationName("youtube-cmdline-search-sample").build();
+            YouTube.Channels.List channelRequest = youtube.channels().list("contentDetails");
+            channelRequest.setForUsername("anteatertvtelevision");
+            channelRequest.setMine(true);
+            channelRequest.setFields("items/contentDetails,nextPageToken,pageInfo");
+            ChannelListResponse result = channelRequest.execute();
 
+            //should be just 1 item
+            List<Channel> channelList = result.getItems();
+            if(channelList != null){
+                String uploadPlaylists = channelList.get(0).getContentDetails().getRelatedPlaylists().getUploads();
+                List<PlaylistItem> playlistItemList = new ArrayList<PlaylistItem>();
+                YouTube.PlaylistItems.List playListItemsGet = youtube.playlistItems().list("id,contentDetails,snippet");
+                playListItemsGet.setPlaylistId(uploadPlaylists);
+                playListItemsGet.setFields(
+                        "items(contentDetails/videoId,snippet/title,snippet/publishedAt),nextPageToken,pageInfo");
+                //nextToken represents one page of the uploaded list
+                //if nextToken is null that means end of videos
+                String nextToken = "";
+                int i = 0;
+                while(nextToken != null){
+                    playListItemsGet.setPageToken(nextToken);
+                    PlaylistItemListResponse playlistItemResult = playListItemsGet.execute();
+                    playlistItemList.addAll(playlistItemResult.getItems());
+                    nextToken = playlistItemResult.getNextPageToken();
+                    System.out.println(playlistItemList.get(i++));
+                }
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }catch(Throwable t){
+            t.printStackTrace();
+        }
+
+    }
 
 
 }

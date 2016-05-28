@@ -16,11 +16,13 @@
 
 package com.zotfeed2;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
@@ -69,6 +71,10 @@ public class ListContentFragment extends Fragment {
     ArrayList<Article> feeds = new ArrayList<Article>();
     ArrayList<Article> results = new ArrayList<Article>();
     private boolean search = false;
+    Constants constants;
+    AlertDialog alertDialog;
+
+
     public static ListContentFragment newInstance(String link){
         ListContentFragment fragment = new ListContentFragment();
         Bundle bundle = new Bundle();
@@ -80,14 +86,14 @@ public class ListContentFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         link = getArguments().getString(LINK_PARAM);
-
+        constants = (Constants) getActivity().getApplicationContext();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-        System.out.println("onviewcreated");
+     //   System.out.println("onviewcreated");
     }
 
     @Override
@@ -96,20 +102,25 @@ public class ListContentFragment extends Fragment {
         View view = inflater.inflate(R.layout.recycler_view, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
         RSSFeedController controller = null;
-        if(link != null) {
 
-            System.out.println(link +"link here!!!");
-            controller = new RSSFeedController(link);
-            controller.execute();
-            dialog = new ProgressDialog(getContext());
-            if(feeds.isEmpty()) {
-                dialog.setMessage("Loading New University Articles");
-                dialog.show();
-            }else if(search){
-                recyclerView.setAdapter(new ContentAdapter(feeds));
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        if(constants.isNetworkAvailable()) {
+            if (link != null) {
+
+                System.out.println(link + "link here!!!");
+                controller = new RSSFeedController(link);
+                controller.execute();
+                dialog = new ProgressDialog(getContext());
+                if (feeds.isEmpty()) {
+                    dialog.setMessage("Loading New University Articles");
+                    dialog.show();
+                } else if (search) {
+                    recyclerView.setAdapter(new ContentAdapter(feeds));
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                }
             }
+        }else{
+            showDialog();
         }
         setHasOptionsMenu(true);
         System.out.println("onCreate");
@@ -214,9 +225,11 @@ public class ListContentFragment extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    Intent intent = new Intent(getContext(), ViewArticles.class);
                     String url = article.getUrl();
-                    intent.setData(Uri.parse(url));
+                    String title = article.getTitle();
+                    intent.putExtra("url", url);
+                    intent.putExtra("title", title);
                     startActivity(intent);
                 }
             });
@@ -318,5 +331,21 @@ public class ListContentFragment extends Fragment {
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
         }
+    }
+    protected void showDialog(){
+            alertDialog = new AlertDialog.Builder(getContext())
+                    .setTitle("Internet Connection")
+                    .setMessage("You are not connected to Internet. Please check your connection settings and try again")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            return;
+                           // dialog.cancel();
+                           // getActivity().getSupportFragmentManager().popBackStack();
+                        }
+                    }).create();
+        alertDialog.show();
+
     }
 }
