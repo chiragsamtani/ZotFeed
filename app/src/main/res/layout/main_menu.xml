@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffd200"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@drawable/zotfeed_logo"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\tKUCI\n\tStream your favorite radio show"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:gravity="left|center_vertical"
+            android:id="@+id/button"
+            android:background="@drawable/button_layout_first"
+            android:drawableLeft="@drawable/icon_music"
+            android:clickable="false"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\tNEW U\n\tRead what&apos;s new at UCI"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:gravity="left|center_vertical"
+            android:id="@+id/button2"
+            android:background="@drawable/button_layout_first"
+            android:drawableLeft="@drawable/icon_news"
+            android:clickable="false"
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/button"
+            android:layout_alignLeft="@+id/button"
+            android:layout_alignStart="@+id/button" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\tANTEATER TV\n\tWatch the latest videos from UCI"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            android:gravity="left|center_vertical"
+            android:id="@+id/button3"
+            android:background="@drawable/button_layout_first"
+            android:drawableLeft="@drawable/icon_video"
+            android:clickable="false"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/button2"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+</LinearLayout>
