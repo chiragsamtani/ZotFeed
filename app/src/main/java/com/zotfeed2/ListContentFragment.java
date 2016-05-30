@@ -134,43 +134,47 @@ public class ListContentFragment extends Fragment {
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView sv = (SearchView) MenuItemCompat.getActionView(searchItem);
         sv.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                System.out.print("QUERY:" + query);
-                results = new ArrayList<Article>();
-                if(!feeds.isEmpty() || feeds != null){
-                    for(Article article : feeds){
-                        //System.out.println("Title: " + article.getTitle());
-                        if(article.getTitle().toLowerCase().contains(query.toLowerCase())){
-                            results.add(article);
-                            System.out.println("Results: " + article.getTitle());
+        if(sv != null){
+            sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    System.out.print("QUERY:" + query);
+                    results = new ArrayList<Article>();
+                    if(!feeds.isEmpty() || feeds != null){
+                        for(Article article : feeds){
+                            //System.out.println("Title: " + article.getTitle());
+                            if(article.getTitle().toLowerCase().contains(query.toLowerCase())){
+                                results.add(article);
+                                System.out.println("Results: " + article.getTitle());
+                            }
                         }
-                    }
-                    System.out.println("Size: " + results.size());
-                    search = true;
-                    recyclerView.setAdapter(new ContentAdapter(results));
-                    recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if(newText.isEmpty() || newText.equals(" ")){
-                    if(feeds != null) {
-                        recyclerView.setAdapter(new ContentAdapter(feeds));
+                        System.out.println("Size: " + results.size());
+                        search = true;
+                        recyclerView.setAdapter(new ContentAdapter(results));
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        return true;
+                    }
+                    else{
+                        return false;
                     }
                 }
-                return false;
-            }
-        });
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    if(newText.isEmpty() || newText.equals(" ")){
+                        if(feeds != null) {
+                            recyclerView.setAdapter(new ContentAdapter(feeds));
+                            recyclerView.setHasFixedSize(true);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        }
+                    }
+                    return false;
+                }
+            });
+        }
+        super.onCreateOptionsMenu(menu, inflater);
+
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

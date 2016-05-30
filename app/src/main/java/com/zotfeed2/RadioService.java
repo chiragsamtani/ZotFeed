@@ -156,15 +156,15 @@ public class RadioService extends Service implements OnCompletionListener, OnPre
                 mediaPlayer.stop();
                 builder.mActions.clear();
                 stopForeground(true);
-                Intent switchIntent = new Intent(context, MainActivity.class);
+                Intent switchIntent = new Intent(context, KUCIActivity.class);
                 switchIntent.putExtra("command", constants.STOP_CODE);
                 switchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(switchIntent);
             }
             else if (action.equals(PLAY_PAUSE))
             {
-                Intent switchIntent = new Intent(context, MainActivity.class);
-                Intent playIntent = new Intent(context, MainActivity.class);
+                Intent switchIntent = new Intent(context, KUCIActivity.class);
+                Intent playIntent = new Intent(context, KUCIActivity.class);
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
                     builder.mActions.clear();

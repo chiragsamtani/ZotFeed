@@ -80,7 +80,7 @@ public class ViewSchedules extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), NewUniversityActivity.class);
                             startActivity(intent);
                         }else if(menuItem.getTitle().equals("KUCI")){
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), KUCIActivity.class);
                             startActivity(intent);
                         }
                         else if(menuItem.getTitle().equals("AnteaterTV")){

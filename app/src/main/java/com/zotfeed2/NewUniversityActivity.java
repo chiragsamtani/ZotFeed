@@ -100,7 +100,7 @@ public class NewUniversityActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         // Set item in checked state
                         if (menuItem.getTitle().equals("KUCI")) {
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), KUCIActivity.class);
                             startActivity(intent);
                         } else if (menuItem.getTitle().equals("New University")) {
                             Intent intent = new Intent(getApplicationContext(), NewUniversityActivity.class);
@@ -262,7 +262,7 @@ public class NewUniversityActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        } else if (id == android.R.id.home) {
+        } if (id == android.R.id.home) {
             mDrawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);

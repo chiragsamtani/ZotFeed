@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ZotFeed</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_new_university">NewUniversity</string>
+    <string name="title_activity_new_university">New University</string>
     <string name="item_title">Title</string>
     <string name="new_u_title">Article Title</string>
     <string name="item_desc">Description</string>
@@ -15,14 +15,15 @@
     </string>
     <string name="detail_location">"8 Rue Scribe, 75009 Paris, France"</string>
     <string name="searchbar">"Search"</string>
-    <string name="title_activity_schedule">ScheduleActivity</string>
+    <string name="title_activity_schedule">KUCI Schedules</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_anteater_tv">AnteaterTvActivity</string>
+    <string name="title_activity_anteater_tv">AnteaterTV</string>
     <string name="nav_anteatertv">AnteaterTV</string>
     <string name="nav_newuniversity">New University</string>
     <string name="nav_kuci">KUCI</string>
-    <string name="title_activity_view_schedules">ViewSchedules</string>
-    <string name="title_activity_schedule_pop_up">SchedulePopUp</string>
+    <string name="title_activity_view_schedules">KUCI Schedules</string>
+    <string name="title_activity_schedule_pop_up">Show Details</string>
     <string name="title_activity_web_view">WebViewActivity</string>
-    <string name="title_activity_view_articles">ViewArticle</string>
+    <string name="title_activity_view_articles">View Article</string>
+    <string name="title_activity_kuci">KUCI Radio</string>
 </resources>

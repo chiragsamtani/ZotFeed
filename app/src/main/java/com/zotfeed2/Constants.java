@@ -9,11 +9,11 @@ import android.net.NetworkInfo;
  * Created by CHIRAG on 5/23/2016.
  */
 public class Constants extends Application{
-    public static final String PLAY_PAUSE = "PLAY_PAUSE";
-    public static final int STOP_CODE = 2;
-    public static final int PAUSE_CODE = 3;
-    public static final int PLAY_CODE = 4;
-    public static final String STOP_RADIO = "STOP";
+    public  final String PLAY_PAUSE = "PLAY_PAUSE";
+    public  final int STOP_CODE = 2;
+    public  final int PAUSE_CODE = 3;
+    public  final int PLAY_CODE = 4;
+    public  final String STOP_RADIO = "STOP";
 
     @Override
     public void onCreate(){

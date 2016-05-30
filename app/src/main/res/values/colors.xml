@@ -101,8 +101,10 @@
     <color name="ScheduleTab">#555759</color>
 <color name="NewUToolbar">#6aa2b8</color>
 <color name="NewUTabs">#c6beb5</color>
-    <color name="ViewArticleTab">#0064a4</color>
-    <color name="FabButton">#ffd200</color>
+    <color name="ViewArticleTab">#1b3d6d</color>
+    <color name="FabButton">#f78d2d</color>
+    <color name="AnteaterToolbar">#0064a4</color>
+    <color name="AnteaterTabs">#ffd200</color>
 
 <color name="UntouchedButton">@color/Gray</color>
 

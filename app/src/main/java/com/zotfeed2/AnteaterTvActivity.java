@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.View;
 
 import android.content.Intent;
@@ -22,6 +23,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpRequest;
@@ -38,6 +47,7 @@ import com.google.api.services.youtube.model.PlaylistListResponse;
 import com.google.common.collect.Lists;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -45,6 +55,7 @@ import java.util.List;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -58,9 +69,15 @@ import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 public class AnteaterTvActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
+    private ArrayList<String> pageToken;
+    private FloatingActionButton prevButton;
+    private FloatingActionButton nextButton;
     private static YouTube youtube;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +89,7 @@ public class AnteaterTvActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Setting ViewPager for each Tabs
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         // Set Tabs inside Toolbar
@@ -81,9 +98,7 @@ public class AnteaterTvActivity extends AppCompatActivity {
 
         // Create Navigation drawer and inflate layout
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-
-        // Adding menu icon to Toolbar
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);        // Adding menu icon to Toolbar
         ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null) {
             supportActionBar.setHomeAsUpIndicator(R.drawable.menubar);
@@ -100,12 +115,10 @@ public class AnteaterTvActivity extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), NewUniversityActivity.class);
                             startActivity(intent);
                         }else if(menuItem.getTitle().equals("KUCI")){
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), KUCIActivity.class);
                             startActivity(intent);
                         }
                         else if(menuItem.getTitle().equals("AnteaterTV")){
-                            Intent intent = new Intent(getApplicationContext(), AnteaterTvActivity.class);
-                            startActivity(intent);
                         }
                         menuItem.setChecked(true);
 
@@ -117,15 +130,16 @@ public class AnteaterTvActivity extends AppCompatActivity {
                     }
                 });
 
+
     }
 
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new CardContentFragment(), "Arts");
-        adapter.addFragment(new CardContentFragment(), "Events");
-        adapter.addFragment(new CardContentFragment(), "Music");
-        adapter.addFragment(new CardContentFragment(), "Sports");
+        String videoParams = "videos";
+        String playlistParams = "playlist";
+        adapter.addFragment(CardContentFragment.newInstance(videoParams), "Videos");
+        adapter.addFragment(CardContentFragment.newInstance(playlistParams), "Playlists");
         viewPager.setAdapter(adapter);
     }
 
@@ -173,56 +187,66 @@ public class AnteaterTvActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == android.R.id.home) {
+        if (id == android.R.id.home) {
             mDrawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public static void loadVideos(){
-        try{
-            youtube = new YouTube.Builder(new NetHttpTransport(), new JacksonFactory(), new HttpRequestInitializer() {
-                @Override
-                public void initialize(HttpRequest httpRequest) throws IOException {
-                }
-            }).setApplicationName("youtube-cmdline-search-sample").build();
-            YouTube.Channels.List channelRequest = youtube.channels().list("contentDetails");
-            channelRequest.setForUsername("anteatertvtelevision");
-            channelRequest.setMine(true);
-            channelRequest.setFields("items/contentDetails,nextPageToken,pageInfo");
-            ChannelListResponse result = channelRequest.execute();
-
-            //should be just 1 item
-            List<Channel> channelList = result.getItems();
-            if(channelList != null){
-                String uploadPlaylists = channelList.get(0).getContentDetails().getRelatedPlaylists().getUploads();
-                List<PlaylistItem> playlistItemList = new ArrayList<PlaylistItem>();
-                YouTube.PlaylistItems.List playListItemsGet = youtube.playlistItems().list("id,contentDetails,snippet");
-                playListItemsGet.setPlaylistId(uploadPlaylists);
-                playListItemsGet.setFields(
-                        "items(contentDetails/videoId,snippet/title,snippet/publishedAt),nextPageToken,pageInfo");
-                //nextToken represents one page of the uploaded list
-                //if nextToken is null that means end of videos
-                String nextToken = "";
-                int i = 0;
-                while(nextToken != null){
-                    playListItemsGet.setPageToken(nextToken);
-                    PlaylistItemListResponse playlistItemResult = playListItemsGet.execute();
-                    playlistItemList.addAll(playlistItemResult.getItems());
-                    nextToken = playlistItemResult.getNextPageToken();
-                    System.out.println(playlistItemList.get(i++));
-                }
-
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }catch(Throwable t){
-            t.printStackTrace();
-        }
-
-    }
-
+//    public void loadVideos(){
+//       try{
+//           //https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=UUbnxxWYkWtb4vpFRdkf3hzQ&key=AIzaSyBHpRVQOEXpfcn-CHxR5eQxqhbDdN0Xw-o
+//           final Map<String, String> params = new HashMap<String, String>();
+//           RequestQueue queue = Volley.newRequestQueue(this);
+//           String url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=UUbnxxWYkWtb4vpFRdkf3hzQ&key=AIzaSyBHpRVQOEXpfcn-CHxR5eQxqhbDdN0Xw-o";
+//           JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, url, new JSONObject(params),
+//                   new Response.Listener<JSONObject>() {
+//                       @Override
+//                       public void onResponse(JSONObject response) {
+//                           try {
+//                               //System.out.println(response);
+//                               JSONArray item = response.getJSONArray("items");
+//                               String nextPageToken = response.getString("nextPageToken");
+//                               ArrayList<VideoItem> videoBeans = new ArrayList<VideoItem>();
+//                               for(int i = 0; i < item.length(); i++){
+//                                   VideoItem videoItem = new VideoItem();
+//                                   JSONObject oneItem = (JSONObject) item.getJSONObject(i);
+//                                   JSONObject snippet = (JSONObject) oneItem.getJSONObject("snippet");
+//
+//                                   String title = snippet.getString("title");
+//                                   videoItem.setTitle(title);
+//
+//                                   String description = snippet.getString("description");
+//                                   videoItem.setDescription(description);
+//
+//                                   JSONObject thumbnail = (JSONObject) snippet.getJSONObject("thumbnails");
+//                                   JSONObject highResImage = (JSONObject) thumbnail.getJSONObject("high");
+//                                   String imageUrl = highResImage.getString("url");
+//                                   videoItem.setImageUrl(imageUrl);
+//
+//                                   JSONObject resourcesId = (JSONObject) snippet.getJSONObject("resourceId");
+//                                   String videoUrl = resourcesId.getString("videoId");
+//                                   videoItem.setVideoUrl(videoUrl);
+//                                   videoBeans.add(videoItem);
+//
+//                               }
+//                           } catch (Exception e) {
+//                               e.printStackTrace();
+//                           }
+//                       }
+//                   }, new Response.ErrorListener() {
+//               @Override
+//               public void onErrorResponse(VolleyError error) {
+//                   // handle error
+//               }
+//           }) {
+//           };
+//           queue.add(req);
+//
+//       }catch (Exception e){
+//           e.printStackTrace();
+//       }
+//
+//    }
 
 }

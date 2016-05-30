@@ -15,6 +15,8 @@
     <color name="ActionBar">@color/MainColor</color>
     <color name="AdapterCardColor">@color/MidnightBlue</color>
     <color name="AliceBlue">#F0F8FF</color>
+    <color name="AnteaterTabs">#ffd200</color>
+    <color name="AnteaterToolbar">#0064a4</color>
     <color name="AntiqueWhite">#FAEBD7</color>
     <color name="Aqua">#00FFFF</color>
     <color name="Aquamarine">#7FFFD4</color>
@@ -71,7 +73,7 @@
     <color name="DeepSkyBlue">#00BFFF</color>
     <color name="DimGray">#696969</color>
     <color name="DodgerBlue">#1E90FF</color>
-    <color name="FabButton">#ffd200</color>
+    <color name="FabButton">#f78d2d</color>
     <color name="FireBrick">#B22222</color>
     <color name="FloralWhite">#FFFAF0</color>
     <color name="ForestGreen">#228B22</color>
@@ -200,7 +202,7 @@
     <color name="Transparent">#00FFFFFF</color>
     <color name="Turquoise">#40E0D0</color>
     <color name="UntouchedButton">@color/Gray</color>
-    <color name="ViewArticleTab">#0064a4</color>
+    <color name="ViewArticleTab">#1b3d6d</color>
     <color name="Violet">#EE82EE</color>
     <color name="Wheat">#F5DEB3</color>
     <color name="White">#FFFFFF</color>
@@ -588,12 +590,13 @@
     <string name="new_u_title">Article Title</string>
     <string name="searchbar">"Search"</string>
     <string name="status_bar_notification_info_overflow">999+</string>
-    <string name="title_activity_anteater_tv">AnteaterTvActivity</string>
-    <string name="title_activity_new_university">NewUniversity</string>
-    <string name="title_activity_schedule">ScheduleActivity</string>
-    <string name="title_activity_schedule_pop_up">SchedulePopUp</string>
-    <string name="title_activity_view_articles">ViewArticle</string>
-    <string name="title_activity_view_schedules">ViewSchedules</string>
+    <string name="title_activity_anteater_tv">AnteaterTV</string>
+    <string name="title_activity_kuci">KUCI Radio</string>
+    <string name="title_activity_new_university">New University</string>
+    <string name="title_activity_schedule">KUCI Schedules</string>
+    <string name="title_activity_schedule_pop_up">Show Details</string>
+    <string name="title_activity_view_articles">View Article</string>
+    <string name="title_activity_view_schedules">KUCI Schedules</string>
     <string name="title_activity_web_view">WebViewActivity</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>

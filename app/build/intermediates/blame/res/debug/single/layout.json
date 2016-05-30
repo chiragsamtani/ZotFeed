@@ -1,11 +1,11 @@
 [
     {
-        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
-        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_mode_bar.xml"
-    },
-    {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_mode_bar.xml"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu_item.xml",
@@ -36,36 +36,36 @@
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\notification_template_part_chronometer.xml"
     },
     {
-        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
-        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
-    },
-    {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\notification_template_lines.xml"
+    },
+    {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_list.xml",
         "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\item_list.xml"
     },
     {
-        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
-        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_dialog_title_material.xml"
-    },
-    {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_schedule_pop_up.xml",
         "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\activity_schedule_pop_up.xml"
     },
     {
-        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
-        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_bar_up_container.xml"
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
+        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_menu_layout.xml"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_new_university.xml",
         "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\activity_new_university.xml"
     },
     {
-        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
-        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_menu_layout.xml"
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
+        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_bar_up_container.xml"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_action.xml",
@@ -92,28 +92,28 @@
         "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\item_sliding.xml"
     },
     {
-        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_subheader.xml",
-        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\layout\\design_navigation_item_subheader.xml"
-    },
-    {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_subheader.xml",
+        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\layout\\design_navigation_item_subheader.xml"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_cancel_action.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\notification_media_cancel_action.xml"
     },
     {
-        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
-        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\select_dialog_item_material.xml"
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_view_article.xml",
+        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\content_view_article.xml"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_list_menu_item_radio.xml"
     },
     {
-        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_view_article.xml",
-        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\content_view_article.xml"
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
+        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\select_dialog_item_material.xml"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_sheet_dialog.xml",
@@ -128,12 +128,12 @@
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\layout\\design_layout_snackbar_include.xml"
     },
     {
-        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_icon.xml",
-        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\layout\\design_layout_tab_icon.xml"
-    },
-    {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_icon.xml",
+        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\layout\\design_layout_tab_icon.xml"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
@@ -142,6 +142,10 @@
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\notification_template_media.xml"
+    },
+    {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_kuci.xml",
+        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\content_kuci.xml"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
@@ -188,6 +192,10 @@
         "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\popup.xml"
     },
     {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_kuci.xml",
+        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\activity_kuci.xml"
+    },
+    {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
     },
@@ -228,16 +236,16 @@
         "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\content_main.xml"
     },
     {
-        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_view_article.xml",
-        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\activity_view_article.xml"
-    },
-    {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_view_schedules.xml",
         "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\content_view_schedules.xml"
     },
     {
-        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
-        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\activity_main.xml"
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_view_article.xml",
+        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\activity_view_article.xml"
+    },
+    {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item.xml",
+        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\layout\\design_navigation_item.xml"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_schedule.xml",
@@ -248,8 +256,8 @@
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.3.0\\res\\layout\\support_simple_spinner_dropdown_item.xml"
     },
     {
-        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item.xml",
-        "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\layout\\design_navigation_item.xml"
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
+        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\activity_main.xml"
     },
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_text.xml",
@@ -282,5 +290,9 @@
     {
         "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar.xml",
         "source": "D:\\ZotFeed2\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\23.3.0\\res\\layout\\design_layout_snackbar.xml"
+    },
+    {
+        "merged": "D:\\ZotFeed2\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main_menu.xml",
+        "source": "D:\\ZotFeed2\\app\\src\\main\\res\\layout\\main_menu.xml"
     }
 ]

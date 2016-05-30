@@ -21,10 +21,10 @@ public final class R {
 		public static final int contentPaddingTop = 0x7f0100a3;
 	}
 	public static final class color {
-		public static final int cardview_dark_background = 0x7f0c00d8;
-		public static final int cardview_light_background = 0x7f0c00d9;
-		public static final int cardview_shadow_end_color = 0x7f0c00da;
-		public static final int cardview_shadow_start_color = 0x7f0c00db;
+		public static final int cardview_dark_background = 0x7f0c00da;
+		public static final int cardview_light_background = 0x7f0c00db;
+		public static final int cardview_shadow_end_color = 0x7f0c00dc;
+		public static final int cardview_shadow_start_color = 0x7f0c00dd;
 	}
 	public static final class dimen {
 		public static final int cardview_compat_inset_shadow = 0x7f090058;
