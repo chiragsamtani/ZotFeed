@@ -15,13 +15,13 @@
         <item name="android:textColor">@color/White</item>
     </style>
 
-    <style name="NewUniversityTheme">
+    <style name="NewUniversityTheme" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/DarkBlue</item>
         <item name="colorPrimaryDark">@color/White</item>
         <item name="colorAccent">@color/LightGrey</item>
     </style>
 
-    <style name="AnteaterTVTheme">
+    <style name="AnteaterTVTheme"  parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/DarkBlue</item>
         <item name="colorPrimaryDark">@color/White</item>
         <item name="colorAccent">@color/Gold</item>
@@ -29,8 +29,8 @@
 
     <style name="NavBarTheme">
         <item name="colorPrimary">@color/Black</item>
-        <item name="colorPrimaryDark">@color/DarkBlue</item>
-        <item name="colorAccent">@color/Gold</item>
+        <item name="colorPrimaryDark">@color/UCIblue</item>
+        <item name="colorAccent">@color/UCIgold</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

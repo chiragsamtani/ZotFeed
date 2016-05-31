@@ -16,7 +16,7 @@
     <application
         android:name="com.zotfeed2.Constants"
         android:allowBackup="true"
-        android:icon="@drawable/zotfeed_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="ZotfeedNew"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >

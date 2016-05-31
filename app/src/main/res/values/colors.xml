@@ -108,7 +108,9 @@
 
 <color name="UntouchedButton">@color/Gray</color>
 
-
+    <color name="UCIblue">#0064a4</color>
+    <color name="UCIgold">#ffd200</color>
+    <color name="UCIsecondaryBlue">#1b3d6d</color>
 
 
 

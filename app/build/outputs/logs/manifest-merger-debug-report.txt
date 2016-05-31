@@ -63,7 +63,7 @@ MERGED from [com.android.volley:volley:1.0.0] D:\ZotFeed2\app\build\intermediate
 	android:allowBackup
 		ADDED from D:\ZotFeed2\app\src\main\AndroidManifest.xml:12:9-35
 	android:icon
-		ADDED from D:\ZotFeed2\app\src\main\AndroidManifest.xml:13:9-50
+		ADDED from D:\ZotFeed2\app\src\main\AndroidManifest.xml:13:9-43
 	android:theme
 		ADDED from D:\ZotFeed2\app\src\main\AndroidManifest.xml:16:9-40
 	android:name

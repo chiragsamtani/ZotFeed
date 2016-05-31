@@ -133,8 +133,9 @@ public class ListContentFragment extends Fragment {
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView sv = (SearchView) MenuItemCompat.getActionView(searchItem);
-        sv.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+
         if(sv != null){
+            sv.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
             sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
